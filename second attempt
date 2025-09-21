@@ -1,0 +1,57 @@
+/*
+Given an array nums of size n, return the majority element.
+
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+
+This solution is very slow, and I will try to use hash maps for the next one
+Runtime 482 ms
+Beats 7.47%
+
+Memory 26.88 MB
+Beats 99.97%
+memory not bad but not worth it in most situations
+
+
+*/
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+    // main declarations and initializing variables
+        int num = 0;
+        int tempNum = 0;
+        int size = nums.size();
+        int count=0;
+        int tempCount=0;
+        int i=0;
+        int j=0;
+        // first loop going through the nums list from start to end
+        while(i<nums.size()){
+            tempNum = nums[0];
+            cout << tempNum << "\n\n";
+            // second loop will start where the current number is, then continue till the end, comparing
+            while(tempCount<nums.size()){
+                cout << tempCount << nums[tempCount] << "\n";
+                //if number exists already, erase it from this list and keep track of the times it appears
+                if(tempNum==nums[tempCount]){
+                    count++;
+                    nums.erase(nums.begin()+tempCount);
+                }
+                else{
+                    tempCount++;
+                }
+            }
+            //if the same number has repeated, half of the total size breaks out
+            if(count>(size/2)){
+                num = tempNum;
+                break;
+            }
+            // else keep a new count for another number
+            else{
+                count=0;
+                tempCount=0;
+            }
+            i++;
+        }
+        return num;
+    }
+};
